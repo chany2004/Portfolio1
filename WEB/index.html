@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Khristian | Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
@@ -88,11 +88,14 @@
     .av-badge::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
     .eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--accent2);margin-bottom:12px;opacity:0;transition:opacity .6s .1s;}
     .eyebrow.on{opacity:1;}
-    .htitle{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:6px;overflow:hidden;word-break:break-word;}
-    .htitle span{display:block;transform:translateY(50px);opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .6s;}
-    .htitle span.on{transform:translateY(0);opacity:1;}
+    .htitle{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;line-height:1.05;letter-spacing:-1.5px;margin-bottom:6px;overflow:visible;word-break:break-word;}
+    .htitle > span{display:block;transform:translateY(50px);opacity:0;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .6s;}
+    .htitle > span.on{transform:translateY(0);opacity:1;}
     .htitle .l2{transition-delay:.1s;color:var(--accent2);}
-    .cursor{display:inline-block;width:2px;height:34px;background:var(--accent2);margin-left:1px;animation:blink 1s steps(1) infinite;vertical-align:middle;}
+    #welcomeTyped,#typed{display:inline;opacity:1;transform:none;}
+    .cursor{display:inline-block;width:2px;height:34px;background:var(--accent2);margin-left:1px;animation:blink 1s steps(1) infinite;vertical-align:middle;opacity:1;transform:none;}
+    .htitle .l2 .cursor{opacity:0;}
+    .htitle .l2 .cursor.show{opacity:1;}
     @keyframes blink{50%{opacity:0;}}
     .sub{font-size:14px;color:var(--muted);margin:16px 0 28px;line-height:1.6;opacity:0;transform:translateY(12px);transition:opacity .6s .25s,transform .6s .25s;max-width:340px;margin-left:auto;margin-right:auto;}
     .sub.on{opacity:1;transform:translateY(0);}
@@ -193,6 +196,76 @@
     .btt{position:fixed;bottom:24px;right:20px;width:42px;height:42px;border-radius:12px;background:var(--accent);color:var(--surface);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;z-index:150;opacity:0;pointer-events:none;transform:translateY(12px);transition:all .3s;box-shadow:var(--shadow);}
     .btt.show{opacity:1;pointer-events:all;transform:translateY(0);}
     .btt:hover{transform:translateY(-3px);background:var(--accent2);}
+
+    /* WEATHER — sakura (light) / snow (dark) */
+    .weather-overlay{position:fixed;inset:0;z-index:125;pointer-events:none;background:linear-gradient(180deg,rgba(255,210,220,.035) 0%,transparent 65%);transition:background .5s ease;}
+    .dark .weather-overlay{background:linear-gradient(180deg,rgba(190,205,225,.05) 0%,transparent 60%);}
+    .weather-canvas{position:fixed;inset:0;z-index:126;pointer-events:none;opacity:.72;}
+
+    /* RUNNING DOG */
+    .run-dog-wrap{position:fixed;bottom:46px;left:0;width:96px;height:96px;z-index:140;pointer-events:none;animation:dog-run-path 16s linear infinite;will-change:transform;}
+    .run-dog-body{position:relative;width:96px;height:96px;transform-origin:center bottom;animation:dog-run-bounce 0.24s ease-in-out infinite;}
+    .dog-shadow{position:absolute;bottom:2px;left:50%;width:54px;height:10px;margin-left:-27px;background:radial-gradient(ellipse,rgba(60,50,40,.22) 0%,transparent 72%);animation:dog-shadow-run 0.24s ease-in-out infinite alternate;}
+    .real-dog{width:96px;height:96px;display:block;overflow:visible;filter:drop-shadow(0 4px 6px rgba(60,50,40,.25));transform:translateY(-4px);}
+    .real-dog .tail{transform-origin:18px 58px;animation:tail-run .24s ease-in-out infinite alternate;}
+    .real-dog .leg-fl{transform-origin:38px 78px;animation:run-fl .24s ease-in-out infinite;}
+    .real-dog .leg-fr{transform-origin:52px 78px;animation:run-fr .24s ease-in-out infinite;}
+    .real-dog .leg-bl{transform-origin:62px 76px;animation:run-bl .24s ease-in-out infinite;}
+    .real-dog .leg-br{transform-origin:74px 76px;animation:run-br .24s ease-in-out infinite;}
+    .real-dog .ear-l{transform-origin:30px 28px;animation:ear-run .24s ease-in-out infinite alternate;}
+    .real-dog .ear-r{transform-origin:62px 28px;animation:ear-run .24s ease-in-out infinite alternate-reverse;}
+    .real-dog .tongue{animation:tongue-run .3s ease-in-out infinite alternate;}
+    .real-dog .body-group{animation:body-lean .24s ease-in-out infinite alternate;}
+    @keyframes dog-run-path{
+      0%{transform:translateX(20px) scaleX(1);}
+      48%{transform:translateX(calc(100vw - 116px)) scaleX(1);}
+      50%{transform:translateX(calc(100vw - 116px)) scaleX(-1);}
+      98%{transform:translateX(20px) scaleX(-1);}
+      100%{transform:translateX(20px) scaleX(1);}
+    }
+    @keyframes dog-run-bounce{
+      0%,100%{transform:translateY(0);}
+      50%{transform:translateY(-10px);}
+    }
+    @keyframes dog-shadow-run{
+      0%{transform:scaleX(1);opacity:.22;}
+      100%{transform:scaleX(.75);opacity:.1;}
+    }
+    @keyframes body-lean{
+      0%{transform:rotate(0deg) translateX(0);}
+      100%{transform:rotate(-4deg) translateX(2px);}
+    }
+    @keyframes run-fl{
+      0%,100%{transform:rotate(-38deg) translateY(-2px);}
+      50%{transform:rotate(18deg) translateY(4px);}
+    }
+    @keyframes run-fr{
+      0%,100%{transform:rotate(18deg) translateY(4px);}
+      50%{transform:rotate(-38deg) translateY(-2px);}
+    }
+    @keyframes run-bl{
+      0%,100%{transform:rotate(18deg) translateY(3px);}
+      50%{transform:rotate(-38deg) translateY(-2px);}
+    }
+    @keyframes run-br{
+      0%,100%{transform:rotate(-38deg) translateY(-2px);}
+      50%{transform:rotate(18deg) translateY(3px);}
+    }
+    @keyframes tail-run{0%{transform:rotate(-15deg);}100%{transform:rotate(25deg);}}
+    @keyframes ear-run{0%{transform:rotate(-8deg);}100%{transform:rotate(8deg);}}
+    @keyframes tongue-run{0%{transform:scaleY(.9);}100%{transform:scaleY(1.15);}}
+    @media(max-width:520px){
+      .run-dog-wrap{bottom:80px;width:76px;height:76px;}
+      .run-dog-body{width:76px;height:76px;}
+      .real-dog{width:76px;height:76px;}
+      @keyframes dog-run-path{
+        0%{transform:translateX(14px) scaleX(1);}
+        48%{transform:translateX(calc(100vw - 90px)) scaleX(1);}
+        50%{transform:translateX(calc(100vw - 90px)) scaleX(-1);}
+        98%{transform:translateX(14px) scaleX(-1);}
+        100%{transform:translateX(14px) scaleX(1);}
+      }
+    }
 
     footer{text-align:center;padding:28px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
     footer button{background:none;border:none;color:var(--accent2);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:600;}
@@ -346,7 +419,7 @@
   <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
   <div class="drawer" id="drawer">
     <div class="drawer-top">
-      <div class="drawer-header">
+    <div class="drawer-header">
         <span class="drawer-logo">KHRISTIAN</span>
         <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu"><i class="ti ti-x"></i></button>
       </div>
@@ -364,12 +437,12 @@
       <button class="drawer-link" data-section="projects" onclick="nav('projects')"><i class="ti ti-layout-grid"></i> Projects</button>
       <button class="drawer-link" data-section="experience" onclick="nav('experience')"><i class="ti ti-briefcase"></i> Experience</button>
       <button class="drawer-link" data-section="contact" onclick="nav('contact')"><i class="ti ti-mail"></i> Contact</button>
-      <div class="drawer-div"></div>
+    <div class="drawer-div"></div>
       <button class="drawer-link" onclick="downloadCV()"><i class="ti ti-file-cv"></i> Download CV</button>
       <button class="drawer-link" onclick="toggleDark()"><i class="ti ti-moon" id="drawerThemeIco"></i> <span id="drawerThemeTxt">Dark Mode</span></button>
     </nav>
     <div class="drawer-bottom">
-      <div class="drawer-socs">
+    <div class="drawer-socs">
         <a href="https://tiktok.com" target="_blank" rel="noopener" class="drawer-soc" title="TikTok" onclick="trackSocial('TikTok')"><i class="ti ti-brand-tiktok"></i></a>
         <a href="https://instagram.com" target="_blank" rel="noopener" class="drawer-soc" title="Instagram" onclick="trackSocial('Instagram')"><i class="ti ti-brand-instagram"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61587091991268" target="_blank" rel="noopener" class="drawer-soc" title="Facebook" onclick="trackSocial('Facebook')"><i class="ti ti-brand-facebook"></i></a>
@@ -393,8 +466,73 @@
     </div>
   </div>
 
+  <!-- WEATHER EFFECTS -->
+  <div class="weather-overlay" id="weatherOverlay"></div>
+  <canvas class="weather-canvas" id="weatherCanvas"></canvas>
+
   <!-- TOAST -->
   <div class="toast" id="toast"></div>
+
+  <!-- RUNNING DOG -->
+  <div class="run-dog-wrap" aria-hidden="true">
+    <div class="run-dog-body">
+      <div class="dog-shadow"></div>
+      <svg class="real-dog" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="furMain" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#C9956A"/><stop offset="45%" stop-color="#A67B4E"/><stop offset="100%" stop-color="#7A5535"/>
+            </linearGradient>
+            <linearGradient id="furLight" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#E2C4A0"/><stop offset="100%" stop-color="#B8895A"/>
+            </linearGradient>
+            <linearGradient id="furDark" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#6B4A30"/><stop offset="100%" stop-color="#4A3220"/>
+            </linearGradient>
+            <filter id="dogSoft"><feGaussianBlur stdDeviation="0.3"/></filter>
+          </defs>
+          <g class="body-group">
+          <!-- Tail -->
+          <g class="tail">
+            <path d="M16 60 Q6 50 10 40 Q14 34 20 38" fill="none" stroke="url(#furDark)" stroke-width="4.5" stroke-linecap="round"/>
+            <ellipse cx="10" cy="38" rx="3.5" ry="4.5" fill="url(#furDark)"/>
+          </g>
+          <!-- Back legs -->
+          <g class="leg-bl"><rect x="57" y="66" width="8" height="18" rx="3.5" fill="url(#furDark)"/><ellipse cx="61" cy="85" rx="5.5" ry="3.5" fill="#3D2818"/><rect x="58" y="78" width="6" height="4" rx="1" fill="#4A3220" opacity=".5"/></g>
+          <g class="leg-br"><rect x="69" y="66" width="8" height="18" rx="3.5" fill="url(#furDark)"/><ellipse cx="73" cy="85" rx="5.5" ry="3.5" fill="#3D2818"/><rect x="70" y="78" width="6" height="4" rx="1" fill="#4A3220" opacity=".5"/></g>
+          <!-- Body -->
+          <ellipse cx="50" cy="60" rx="27" ry="17" fill="url(#furMain)"/>
+          <ellipse cx="50" cy="63" rx="19" ry="9" fill="url(#furLight)" opacity=".45"/>
+          <path d="M38 55 Q50 50 62 55" fill="none" stroke="#8B6340" stroke-width=".8" opacity=".4"/>
+          <!-- Front legs -->
+          <g class="leg-fl"><rect x="32" y="66" width="8" height="20" rx="3.5" fill="url(#furDark)"/><ellipse cx="36" cy="87" rx="5.5" ry="3.5" fill="#3D2818"/><rect x="33" y="80" width="6" height="4" rx="1" fill="#4A3220" opacity=".5"/></g>
+          <g class="leg-fr"><rect x="46" y="66" width="8" height="20" rx="3.5" fill="url(#furDark)"/><ellipse cx="50" cy="87" rx="5.5" ry="3.5" fill="#3D2818"/><rect x="47" y="80" width="6" height="4" rx="1" fill="#4A3220" opacity=".5"/></g>
+          <!-- Neck -->
+          <ellipse cx="44" cy="48" rx="14" ry="12" fill="url(#furMain)"/>
+          <!-- Head -->
+          <ellipse cx="42" cy="36" rx="20" ry="18" fill="url(#furMain)"/>
+          <!-- Ears -->
+          <g class="ear-l"><ellipse cx="26" cy="26" rx="8" ry="13" fill="url(#furDark)" transform="rotate(-28 26 26)"/><ellipse cx="27" cy="28" rx="4" ry="7" fill="#8B6340" opacity=".4" transform="rotate(-28 27 28)"/></g>
+          <g class="ear-r"><ellipse cx="58" cy="26" rx="8" ry="13" fill="url(#furDark)" transform="rotate(28 58 26)"/><ellipse cx="57" cy="28" rx="4" ry="7" fill="#8B6340" opacity=".4" transform="rotate(28 57 28)"/></g>
+          <!-- Snout -->
+          <ellipse cx="42" cy="42" rx="11" ry="9" fill="url(#furLight)"/>
+          <!-- Eyes -->
+          <ellipse cx="34" cy="34" rx="4" ry="4.5" fill="#1A1410"/>
+          <ellipse cx="50" cy="34" rx="4" ry="4.5" fill="#1A1410"/>
+          <circle cx="35.5" cy="32.5" r="1.8" fill="#fff"/>
+          <circle cx="51.5" cy="32.5" r="1.8" fill="#fff"/>
+          <circle cx="36" cy="33" r=".6" fill="#1A1410"/>
+          <circle cx="52" cy="33" r=".6" fill="#1A1410"/>
+          <!-- Nose -->
+          <ellipse cx="42" cy="41" rx="5.5" ry="4" fill="#1A1410"/>
+          <ellipse cx="40.5" cy="40" rx="1.5" ry="1" fill="#3A3028" opacity=".6"/>
+          <!-- Mouth -->
+          <path d="M42 44 Q38 47 35 45" fill="none" stroke="#4A3220" stroke-width="1" stroke-linecap="round"/>
+          <path d="M42 44 Q46 47 49 45" fill="none" stroke="#4A3220" stroke-width="1" stroke-linecap="round"/>
+          <ellipse class="tongue" cx="42" cy="47" rx="2.5" ry="3.5" fill="#D86060"/>
+          </g>
+        </svg>
+    </div>
+  </div>
 
   <!-- BACK TO TOP -->
   <button class="btt" id="btt" onclick="nav('home')" title="Back to top" aria-label="Back to top"><i class="ti ti-arrow-up"></i></button>
@@ -423,27 +561,27 @@
 
   <div class="hero" id="home">
     <div class="hero-left">
-      <div class="av-wrap">
+    <div class="av-wrap">
         <img class="av" id="av" src="profile.png" alt="Khristian profile photo" />
         <div class="av-badge" title="Available for work"></div>
       </div>
     </div>
     <div class="hero-content">
-      <div class="eyebrow" id="ey">Web & App Developer</div>
-      <div class="htitle">
-        <span class="l1" id="l1">Welcome!</span>
-        <span class="l2" id="l2"><span id="typed"></span><span class="cursor"></span></span>
-      </div>
-      <p class="sub" id="sub">My name is Khristian. I craft beautiful digital experiences — from responsive websites to mobile applications.</p>
-      <div class="btns" id="btns">
-        <button class="btn btn-solid" onclick="nav('contact')">
-          <i class="ti ti-send" style="font-size:15px"></i> Hire Me
-        </button>
+    <div class="eyebrow" id="ey">Web & App Developer</div>
+    <div class="htitle">
+        <span class="l1" id="l1"><span id="welcomeTyped"></span><span class="cursor" id="welcomeCursor"></span></span>
+        <span class="l2" id="l2"><span id="typed"></span><span class="cursor" id="roleCursor"></span></span>
+    </div>
+    <p class="sub" id="sub">My name is Khristian. I craft beautiful digital experiences — from responsive websites to mobile applications.</p>
+    <div class="btns" id="btns">
+      <button class="btn btn-solid" onclick="nav('contact')">
+        <i class="ti ti-send" style="font-size:15px"></i> Hire Me
+      </button>
         <button class="btn btn-ghost" onclick="downloadCV()">
-          <i class="ti ti-file-cv" style="font-size:15px"></i> Download CV
-        </button>
-      </div>
-      <div class="socs" id="socs">
+        <i class="ti ti-file-cv" style="font-size:15px"></i> Download CV
+      </button>
+    </div>
+    <div class="socs" id="socs">
         <a href="https://tiktok.com" target="_blank" rel="noopener" class="soc" title="TikTok" onclick="trackSocial('TikTok')"><i class="ti ti-brand-tiktok"></i></a>
         <a href="https://instagram.com" target="_blank" rel="noopener" class="soc" title="Instagram" onclick="trackSocial('Instagram')"><i class="ti ti-brand-instagram"></i></a>
         <a href="https://www.facebook.com/profile.php?id=61587091991268" target="_blank" rel="noopener" class="soc" title="Facebook" onclick="trackSocial('Facebook')"><i class="ti ti-brand-facebook"></i></a>
@@ -592,11 +730,28 @@
   let toastTimer = null;
 
   // ─── TYPEWRITER ───
+  const welcomeText = 'Welcome!';
   const words = ['Student', 'Developer', 'Designer', 'Creator'];
-  let wi = 0, ci = 0, del = false;
+  let wci = 0, wi = 0, ci = 0, del = false;
+  const welEl = document.getElementById('welcomeTyped');
   const tel = document.getElementById('typed');
+  const welcomeCursor = document.getElementById('welcomeCursor');
+  const roleCursor = document.getElementById('roleCursor');
+
+  function typeWelcome() {
+    if (!welEl) return;
+    if (wci < welcomeText.length) {
+      welEl.textContent = welcomeText.slice(0, ++wci);
+      setTimeout(typeWelcome, 100);
+    } else {
+      if (welcomeCursor) welcomeCursor.style.visibility = 'hidden';
+      if (roleCursor) roleCursor.classList.add('show');
+      setTimeout(type, 500);
+    }
+  }
 
   function type() {
+    if (!tel) return;
     const w = words[wi];
     if (!del) {
       tel.textContent = w.slice(0, ++ci);
@@ -681,6 +836,7 @@
     document.getElementById('themeIco').className = dark ? 'ti ti-sun' : 'ti ti-moon';
     document.getElementById('drawerThemeIco').className = dark ? 'ti ti-sun' : 'ti ti-moon';
     document.getElementById('drawerThemeTxt').textContent = dark ? 'Light Mode' : 'Dark Mode';
+    if (typeof window.rebuildWeather === 'function') window.rebuildWeather();
   }
 
   function loadTheme() {
@@ -850,7 +1006,7 @@ PROJECTS
     document.getElementById('sub').classList.add('on');
     document.getElementById('btns').classList.add('on');
     document.getElementById('socs').classList.add('on');
-    type();
+    typeWelcome();
   }, 150);
 
   const statsObs = new IntersectionObserver(entries => {
@@ -878,10 +1034,124 @@ PROJECTS
 
   loadTheme();
   initScrollSpy();
+  initWeather();
 
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 1024 && drawerOpen) closeDrawer();
   }, { passive: true });
+
+  // ─── WEATHER — sakura (light) / snow (dark) ───
+  function initWeather() {
+    const canvas = document.getElementById('weatherCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let w = 0, h = 0;
+    let particles = [];
+    let mode = null;
+
+    const SAKURA_COLORS = ['#FFB7C5', '#FF9EB5', '#FFC4D0', '#F8A5B5'];
+    const COUNT = { sakura: 36, snow: 52 };
+
+    function isDark() {
+      return document.body.classList.contains('dark');
+    }
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+
+    function createSnow() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 1 + Math.random() * 2.2,
+        speed: 0.45 + Math.random() * 1.1,
+        drift: Math.random() * Math.PI * 2,
+        opacity: 0.3 + Math.random() * 0.45
+      };
+    }
+
+    function createSakura() {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        size: 3.5 + Math.random() * 5,
+        speed: 0.7 + Math.random() * 1.2,
+        drift: Math.random() * Math.PI * 2,
+        rot: Math.random() * Math.PI * 2,
+        rotSpeed: (Math.random() - 0.5) * 0.018,
+        opacity: 0.4 + Math.random() * 0.35,
+        color: SAKURA_COLORS[Math.floor(Math.random() * SAKURA_COLORS.length)]
+      };
+    }
+
+    function rebuild() {
+      mode = isDark() ? 'snow' : 'sakura';
+      const n = COUNT[mode];
+      particles = [];
+      for (let i = 0; i < n; i++) {
+        particles.push(mode === 'snow' ? createSnow() : createSakura());
+      }
+    }
+
+    function drawSnow(f) {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255,255,255,${f.opacity})`;
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
+      f.y += f.speed;
+      f.x += Math.sin(f.drift) * 0.45;
+      f.drift += 0.012;
+      if (f.y > h + 8) {
+        f.y = -8;
+        f.x = Math.random() * w;
+      }
+    }
+
+    function drawSakuraPetal(p) {
+      const s = p.size;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.moveTo(0, -s);
+      ctx.bezierCurveTo(s * 0.75, -s * 0.35, s * 0.55, s * 0.45, 0, s * 0.85);
+      ctx.bezierCurveTo(-s * 0.55, s * 0.45, -s * 0.75, -s * 0.35, 0, -s);
+      ctx.fill();
+      ctx.restore();
+      p.y += p.speed;
+      p.x += Math.sin(p.drift) * 0.55;
+      p.rot += p.rotSpeed;
+      p.drift += 0.014;
+      if (p.y > h + 12) {
+        p.y = -12;
+        p.x = Math.random() * w;
+        p.rot = Math.random() * Math.PI * 2;
+      }
+    }
+
+    function loop() {
+      const current = isDark() ? 'snow' : 'sakura';
+      if (current !== mode) rebuild();
+
+      ctx.clearRect(0, 0, w, h);
+      if (mode === 'snow') {
+        particles.forEach(drawSnow);
+      } else {
+        particles.forEach(drawSakuraPetal);
+      }
+      requestAnimationFrame(loop);
+    }
+
+    window.rebuildWeather = rebuild;
+    resize();
+    rebuild();
+    window.addEventListener('resize', resize, { passive: true });
+    loop();
+  }
 </script>
 </body>
 </html>
